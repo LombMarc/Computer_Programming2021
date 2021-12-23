@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Dec 23 11:42:22 2021
+
+@author: marcolombardi
+"""
+
+#week 3
+#1
+def Summary(st:str):
+    num=[]
+    for j in st:
+        num.append(int(j))
+    SUM=sum(num)
+    mu=SUM/len(num)
+    Max=max(num)
+    Min=min(num)
+    return SUM, mu, Max, Min
+
+#print(Summary("012"))
+
+def tree(n):
+    N=0
+    xs="x"
+    blank=" "
+    while N!=n:
+        N += 1
+        tr=blank*(n-N)+xs*N+xs*(N-1)
+        print(tr)
+    print(blank*(n-1)+"|")
+#tree(10)
+
+def atm():
+    
+    paswd = "1234"
+    amount= 10000
+    c = 0
+    name = input("Insert name: ")
+    while  c < 3:
+        
+        if input("Insert password: ") != paswd:
+            c += 1
+            t = 3-c
+            print("wrong password, " + str(t) +" remaining attempt")
+            if c>=3:
+                print("Max number of attempt reached")
+        else:
+            withdraw = float(input("Hello " + name + ", what is the amount to withdraw? "))
+            if withdraw<=amount:
+                amount = amount-withdraw
+                print("Done")
+                print("Balance: ", amount)
+            else:
+                print("transaction cancelled. ")           
+        
+'''while 1==1:
+    atm() '''      
+
+def Tw(T,v):
+    return 13.125+0.6215*T-11.362*v**0.16 +0.396*T*v**0.16
+
+T = [-25]
+while T[-1] != 10:
+    T.append(T[-1]+5)
+v =[0]  
+while v[-1] != 70:
+    v.append(v[-1]+5)  
+
+table = "-,"
+for i in v:
+    table = table + str(i)+","
+row1 = table[:-1]+'\n'
+
+
+
+for i in T:
+    row1= row1+str(i)+","
+    for j in v:
+        row1=row1+str(Tw(i,j))+','
+    row1 =row1+'\n'
+    
+csv=open("/Users/marcolombardi/PycharmProjects/computer programming/chillwind.csv", 'w')
+csv.write(row1)
+csv.close()
+
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
