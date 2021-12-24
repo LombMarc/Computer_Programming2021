@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Dec 24 11:02:06 2021
+
+@author: marcolombardi
+"""
+import math
+import string
+
+
+def remove_vowel(S,X):
+    Vowel=["A","E","I","O","U","a","e","i","o","u"]
+    digit=["0","1","2","3","4","5","6","7","8","9"]
+    Bet = ["B","b","C","c","D","d","F","f","G","g","H","h","J","j","K","k","L","l","M","m","N","n","P","Q","q","R","r","S","s","T","t","V","v","Z","z"]
+    St = ""
+    if any([i in Vowel for i in S]):
+        for i in S:
+            if i in Vowel:
+                St = St+X
+            if i in digit:
+                St += i
+    elif any([i in Bet for i in S]):
+        for i in Bet:
+            c= S.count(i)
+            if c==0:
+                pass
+            else:
+                St+=i+str(c)
+    else:
+        St=S
+    print(St)
+    return St
+    
+#remove_vowel("CCBBB", "x")
+
+def reverse_vocabulary(dic):
+    K=[]
+    el=[]
+    for key in dic:
+        el.append(key)
+        K.append(dic[key])
+    rev={}
+    for i in range(len(K)):
+        rev[K[i]]=el[i]
+    return rev
+
+#print(reverse_vocabulary({"Due":"Two","tre":"three"}))
+ 
+def merge(l1,l2):
+    l3=l1+l2
+    L=[]
+    if len(l1)!=len(l2):
+        print("Input lists not of same lenght")
+        return 0
+    else:
+        for i in l3:
+            if i%2==1:
+                L.insert(0,i)
+            else:
+                L.insert(-1,i)
+    print(L)
+    
+#merge([2,3,4],[5,5,8])
+ 
+
+
+class Circle():
+    def __init__(self,x,y,r):
+        self.r=r
+        self.x=x
+        self.y=y
+    def __str__(self):
+        return " Radius: "+str(self.r)+"\n Center: ("+str(self.x)+","+str(self.y)+")"
+    def compute_area(self):
+        return math.pi *math.pow(self.r,2)
+    def compute_perimeter(self):
+        return 2*self.r*math.pi
+    def move_to(self,X,Y):
+        self.x=X
+        self.y=Y
+        
+'''A=Circle(0,0,2)
+A.move_to(2, 2)
+print(A) '''
+
+def weight(S):
+    bet=string.ascii_lowercase
+    W=0
+    for i in S:
+        wi=bet.index(i)
+        W+=wi
+    return W
+
+#print(weight("age"))    
+def mergesW(l):
+    L=[]
+    for i in l:
+        w=weight(i)
+        ind=l.index(i)
+        L.append([w,ind])
+    ls=[]
+    L.sort()
+    for j in L:
+        ind=j[1]
+        ls.append(l[ind])
+    return ls
+
+#print(mergesW(["age","e","z"]))
+
+def countY(sent):
+    l=sent.split(" ")
+    c=0
+    for i in l:
+        if i.endswith("y"):
+            c+=1
+        else:
+            pass
+    return c
+
+#countY("Hello my friend what are you doing by your self")
+
+
+
+class Country:
+    def __init__(self, name, capital,pop):
+            self.name=name
+            self.capital=capital
+            self.population=pop
+    def __str__(self):
+        return self.name+", capital "+self.capital+", population "+str(self.population)+" Million"
+    
+class Continent:
+    def __init__(self,countries):
+        self.countries =countries
+    def add_country(self,name,cap,pop):
+        self.countries.append(Country(name,cap,pop))
+
+it=Country("Italy","Rome",65)
+fr=Country("France", "Paris", 59)
+
+
+EU=Continent([it,fr])
+
+EU.add_country("Germany", "Berlin", 87)
+for i in EU.countries:
+    print(i)
